@@ -60,7 +60,7 @@
 
 > 在使用的时候**一定**要注意`KeyChain`操作的返回值。
 
-`KeyChain`操作中得一些参数的设定([一些相关参数的说明](http://blog.sina.com.cn/s/blog_7ea0400d0101fksj.html))：
+`KeyChain`操作中得一些参数的设定([一些相关参数的说明](https://github.com/JyHu/MDDocuments/blob/master/2016/03/KeyChainParameters.md))：
 
 ```
 - (NSMutableDictionary *)getKeychainQueryWithService:(NSString *)service
