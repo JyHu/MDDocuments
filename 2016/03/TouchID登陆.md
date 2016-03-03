@@ -1,5 +1,7 @@
 # TouchID登陆
 
+## [KeyChain and TouchID Demo](https://github.com/JyHu/TouchIDAndKeyChain.git)
+
 <img src="TIDLogin.jpeg" width=320 height=568>
 
 首先需要引入一个库`#import <LocalAuthentication/LAContext.h>`，官方的一个用于TouchID安全验证登陆的`Framework`，首先需要验证是否支持TouchID登陆：
