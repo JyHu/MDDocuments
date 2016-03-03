@@ -1,6 +1,6 @@
 # TouchID登陆
 
-![](http://ww1.sinaimg.cn/large/8acb15f3jw1f1imidi81dj20hs0vk74n.jpg)
+<img src="TIDLogin.jpeg" width=320 height=568>
 
 首先需要引入一个库`#import <LocalAuthentication/LAContext.h>`，官方的一个用于TouchID安全验证登陆的`Framework`，首先需要验证是否支持TouchID登陆：
 
@@ -13,8 +13,10 @@
     return [context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&error];
 }
 ```
+
 如果不支持的话，就需要走自己APP中得密码验证方法来进行验证登陆；
 如果支持的话，就调起TouchID验证的页面：
+
 ```Objective-C
 - (void)evaluatePolicy
 {
@@ -33,13 +35,17 @@
 ```
 
 ## 注意
+
 > `reply`这个block中得代码是在异步线程中执行的，如果有需要的话，必须得抛到主线程中去执行一些东西。
 > 
-> TouchID的失败次数是有限制的，从开始算，如果失败了三次，系统就会自动的退出TouchID的验证界面，并在`reply`block中返回失败的信息，这时还可以调起TouchID的验证，此时如果失败两次即会退出验证界面。在这种情况下，如果还想用TouchID验证，则必须输入手机的登陆密码才能继续验证。需要注意的是，这个失败的次数在iOS设备中所有的APP是累加起来的。
+> TouchID的失败次数是有限制的，从开始算，如果失败了三次，系统就会自动的退出TouchID的验证界面，并在`reply`block中返回失败的信息，这时还可以调起TouchID的验证，此时如果失败两次即会退出验证界面。
+> 在这种情况下，如果还想用TouchID验证，则必须输入手机的登陆密码才能继续验证。
+> 需要注意的是，这个失败的次数在iOS设备中所有的APP是累加起来的。
 >
 
 
 # `KeyChain`
+
 `keychain`是作为苹果中对于数据安全存储的一个地方，类似于`NSUserDefaults`，但又不同于`NSUserDefaults`。
 
 对于`keychain`来说，需要注意的方法有以下四个：
@@ -49,9 +55,11 @@
 * `SecItemDelete`
 
 ## 注意
+
 > 在使用的时候**一定**要注意`KeyChain`操作的返回值。
 
 `KeyChain`操作中得一些参数的设定([一些相关参数的说明](http://blog.sina.com.cn/s/blog_7ea0400d0101fksj.html))：
+
 ```
 - (NSMutableDictionary *)getKeychainQueryWithService:(NSString *)service
 {
@@ -68,11 +76,13 @@
 }
 ```
 
-### `SecItemAdd`
+## `SecItemAdd`
+
 用于将个人数据条目保存到`keychain`中。
 - 方法原型：`OSStatus SecItemAdd(CFDictionaryRef attributes, CFTypeRef * result);`
     - `attributes` : 添加属性的设置。
     - `result` : 可以用与获取返回值，`&res`
+
 ```
 - (OSStatus)saveObject:(id)object forService:(NSString *)service {
     NSMutableDictionary *keychainQuery = [self getKeychainQueryWithService:service];
@@ -81,11 +91,14 @@
     return SecItemAdd((__bridge CFDictionaryRef)keychainQuery, NULL);
 }
 ```
-### `SecItemUpdate`
+
+## `SecItemUpdate`
+
 用于更新`KeyChain`中保存的数据。
 - 方法原型：`OSStatus SecItemUpdate(CFDictionaryRef query, CFDictionaryRef attributesToUpdate);`
     - `query` : 查找属性的设置
     - `attributesToUpdate` : 要更新的数据
+
 ```Objective-C
 - (OSStatus)updateService:(NSString *)service withObject:(id)object
 {
@@ -96,11 +109,14 @@
     return SecItemUpdate((__bridge CFDictionaryRef)keychainQuery, (__bridge CFDictionaryRef)changes);
 }
 ```
-### `SecItemCopyMatching`
+
+## `SecItemCopyMatching`
+
 用于获取保存在`KeyChain`中得数据。
 - 方法原型：`OSStatus SecItemCopyMatching(CFDictionaryRef query, CFTypeRef * result);`
     - `query` : 保存在`KeyChain`中得数据信息。
     - `result` : 从`KeyChain`中取得的数据。
+
 ```Objective-C
 - (id)loadObjectForService:(NSString *)service {
     NSMutableDictionary *keychainQuery = [self getKeychainQueryWithService:service];
@@ -126,10 +142,13 @@
     return results;
 }
 ```
-### `SecItemDelete`
+
+## `SecItemDelete`
+
 用于删除保存在`KeyChain`中得数据。
 - 方法原型:`OSStatus SecItemDelete(CFDictionaryRef query)`
     - `query`:要删除的数据的信息。
+
 ```
 - (void)delete:(NSString *)service {
     NSMutableDictionary *keychainQuery = [self getKeychainQueryWithService:service];
@@ -138,7 +157,9 @@
 ```
 
 # 附:
+
 ## `OSStatus`状态码
+
 ```
 CF_ENUM(OSStatus)
 {
