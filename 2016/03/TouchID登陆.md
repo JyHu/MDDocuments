@@ -1,5 +1,7 @@
 # TouchID登陆
 
+## [KeyChain and TouchID Demo](https://github.com/JyHu/TouchIDAndKeyChain.git)
+
 <img src="TIDLogin.jpeg" width=320 height=568>
 
 首先需要引入一个库`#import <LocalAuthentication/LAContext.h>`，官方的一个用于TouchID安全验证登陆的`Framework`，首先需要验证是否支持TouchID登陆：
@@ -58,7 +60,7 @@
 
 > 在使用的时候**一定**要注意`KeyChain`操作的返回值。
 
-`KeyChain`操作中得一些参数的设定([一些相关参数的说明](http://blog.sina.com.cn/s/blog_7ea0400d0101fksj.html))：
+`KeyChain`操作中得一些参数的设定([一些相关参数的说明](https://github.com/JyHu/MDDocuments/blob/master/2016/03/KeyChainParameters.md))：
 
 ```
 - (NSMutableDictionary *)getKeychainQueryWithService:(NSString *)service
