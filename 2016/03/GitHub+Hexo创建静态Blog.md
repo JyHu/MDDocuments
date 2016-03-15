@@ -4,10 +4,11 @@
 1. 到`https://github.com`创建一个自己的账号；
 2. 创建一个用于放置Blog内容的Repository(代码仓库)，Repository名为 `<username>.github.io`；
 3. 在本地新建一个文件夹，并把创建好的Repository Clone到本地目录下；
-4. CD到项目的根目录下，创建一个测试用的html文件：`printf "<h1>Testing page<h1> It works.\n" > index.html`
+4. CD到项目的根目录下，创建一个测试用的html文件：`printf "<h1>Testing page</h1> It works.\n" > index.html`
 5. push到master分支，然后再浏览器中浏览测试的网页 `<username>.github.io`，如果出现刚才新建的页面就说明成功了；
-6. 清空刚才的测试文件：
+6. 创建一个没有父节点的分支，并清空刚才的测试文件：
 ```
+git checkout --orphan gh-pages
 git rm -rf .
 git commit -a -m "modify"
 git push origin master
