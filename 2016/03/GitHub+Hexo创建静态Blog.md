@@ -46,6 +46,12 @@ deploy:
 `hexo g`<br>
 `hexo d`  部署到github上page页面。
 
+## 四、`Hexo`操作及美化
+[一些操作和美化的方法](http://www.tuicool.com/articles/AfQnQjy/)
+## 五、多平台操作
+如果你有多台电脑，那么你就可能在多台设备上进行Blog内容的更新，对于Hexo来说，你就需要将你创建的Hexo目录在你的多个电脑上进行共享使用，然后才能进行Blog内容的更新。<br>
+可以使用iCloud、百度云、Google Driver、Dropbox等进行内容的同步。<br>
+下面还有一篇用`Dropbox`同步的教程：[教程](http://lucifr.com/2013/06/02/hexo-on-cloud-with-dropbox-and-vps/)
 ## 后记
 遇到的问题及解决的渠道
 
